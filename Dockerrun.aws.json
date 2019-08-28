@@ -1,0 +1,37 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "containerDefinitions": [
+        {
+            "name": "client",
+            "image": "tasfeqhub/fibonacci-client",
+            "hostName": "client",
+            "essential": false
+        },
+        {
+            "name": "server",
+            "image": "tasfeqhub/fibonacci-server",
+            "hostName": "api",
+            "essential": false
+        },
+        {
+            "name": "worker",
+            "image": "tasfeqhub/fibonacci-worker",
+            "hostName": "worker",
+            "essential": false
+        },
+        {
+            "name": "nginx",
+            "image": "tasfeqhub/fibonacci-nginx",
+            "hostName": "nginx",
+            "essential": true,
+            "portMappings": [
+                {
+                    "hostPort": 80,
+                    "containerPort": 80
+                }
+            ],
+            "links": ["client", "server"]
+        }
+
+    ]
+}
