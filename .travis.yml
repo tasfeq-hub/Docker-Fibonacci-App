@@ -20,3 +20,19 @@ after_success:
   - docker push tasfeqhub/fibonacci-nginx
   - docker push tasfeqhub/fibonacci-server
   - docker push tasfeqhub/fibonacci-worker
+
+
+deploy:
+  provider: elasticbeanstalk
+  region: eu-west-1
+  app: docker-fibonacci-app
+  env: DockerFibonacciApp-env
+  bucket_name: elasticbeanstalk-eu-west-1-194615496736
+  bucket_path: docker-fibonacci
+  on:
+    branch: master
+  access_key_id:
+    secure: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: $AWS_SECRET_KEY
+
